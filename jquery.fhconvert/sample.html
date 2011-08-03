@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>fhconvert test</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./fhconvert.js"></script>
+<script type="text/javascript" src="./jquery.fhconvert.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('#zenkaku').blur(function() {
+        var $this = $(this);
+        $this.fhconvert('htof');
+    });
+
+    $('#hankaku').blur(function() {
+        var $this = $(this);
+        $this.fhconvert('ftoh');
+    });
+
+    $('#kana').blur(function() {
+        var $this = $(this);
+        $this.fhconvert('hgtokk');
+    });
+});
+</script>
+<style type="text/css">
+#head {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#main {
+    width: 800px;
+    margin:0 auto;
+}
+
+#demo {
+    background:#F0F0F0;
+    padding:10px;
+}
+
+#desc {
+    border:1px solid #D8D8D8;
+    padding:8px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+</style>
+</script>
+</head>
+<body>
+<div id="main">
+<h1>fhconvert plugin</h1>
+<div id="head">
+    値を半角 → 全角、 全角 → 半角等に変換するプラグイン。<br />
+    blur等と組合せての利用を推奨
+</div>
+<div id="demo">
+    <div id="desc">
+        blurに各種変換をくわえるサンプル
+    </div>
+フォーカスが外れると全角になる。
+<input id="zenkaku" type="text" />
+<br />
+フォーカスが外れると半角になる。
+<input id="hankaku" type="text" />
+<br />
+フォーカスが外れるとカナになる。
+<input id="kana" type="text" />
+</div>
+</div>
+</body>
+</html>
