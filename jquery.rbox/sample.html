@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>rbox</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.rbox.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('.testClass tr').rbox();
+    $('#idtest').rbox();
+    $('#divid').rbox();
+});
+</script>
+<style type="text/css">
+#head {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#main {
+    width: 800px;
+    margin:0 auto;
+}
+
+#demo {
+    background:#F0F0F0;
+    padding:10px;
+}
+
+.desc {
+    border:1px solid #D8D8D8;
+    padding:8px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+table {
+    border:1px solid #999;
+    border-collapse: collapse;
+}
+
+table td{
+    border:1px solid #999;
+    padding: 8px;
+}
+</style>
+</script>
+</head>
+<body>
+<div id="main">
+<h1>rbox</h1>
+<div id="head">
+    チェックボックスをラジオボタンのように扱うライブラリです。<br />
+    タイムテーブルの同一時間帯排他等に使ってください。
+</div>
+<div id="demo">
+    <div class="desc">
+        table trのクラスを指定する場合のサンプル
+    </div>
+    <table class="testClass">
+        <tr>
+            <td>
+                <input type="checkbox" />テスト1
+            </td>
+            <td>
+                <input type="checkbox" />テスト2
+            </td>
+            <td>
+                <input type="checkbox" />テスト3
+            </td>
+            <td>
+                <input type="checkbox" />テスト4
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />テスト5
+            </td>
+            <td>
+                <input type="checkbox" />テスト6
+            </td>
+            <td>
+                <input type="checkbox" />テスト7
+            </td>
+            <td>
+                <input type="checkbox" />テスト8
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />テスト9
+            </td>
+            <td>
+                <input type="checkbox" />テスト10
+            </td>
+            <td>
+                <input type="checkbox" />テスト11
+            </td>
+            <td>
+                <input type="checkbox" />テスト12
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div class="desc">
+        table trのクラスを指定する場合のサンプル ※ 既にクラスが振られている場合の確認
+        <br />
+        指定方法に何ら変化はない
+    </div>
+    <table class="testClass">
+        <tr class="test1">
+            <td>
+                <input type="checkbox" />テスト1
+            </td>
+            <td>
+                <input type="checkbox" />テスト2
+            </td>
+            <td>
+                <input type="checkbox" />テスト3
+            </td>
+            <td>
+                <input type="checkbox" />テスト4
+            </td>
+        </tr>
+        <tr class="test2">
+            <td>
+                <input type="checkbox" />テスト5
+            </td>
+            <td>
+                <input type="checkbox" />テスト6
+            </td>
+            <td>
+                <input type="checkbox" />テスト7
+            </td>
+            <td>
+                <input type="checkbox" />テスト8
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />テスト9
+            </td>
+            <td>
+                <input type="checkbox" />テスト10
+            </td>
+            <td>
+                <input type="checkbox" />テスト11
+            </td>
+            <td>
+                <input type="checkbox" />テスト12
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div class="desc">
+        table全体のIDを指定する場合
+    </div>
+    <table id="idtest">
+        <tr class="test1">
+            <td>
+                <input type="checkbox" />テスト1
+            </td>
+            <td>
+                <input type="checkbox" />テスト2
+            </td>
+            <td>
+                <input type="checkbox" />テスト3
+            </td>
+            <td>
+                <input type="checkbox" />テスト4
+            </td>
+        </tr>
+        <tr class="test2">
+            <td>
+                <input type="checkbox" />テスト5
+            </td>
+            <td>
+                <input type="checkbox" />テスト6
+            </td>
+            <td>
+                <input type="checkbox" />テスト7
+            </td>
+            <td>
+                <input type="checkbox" />テスト8
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />テスト9
+            </td>
+            <td>
+                <input type="checkbox" />テスト10
+            </td>
+            <td>
+                <input type="checkbox" />テスト11
+            </td>
+            <td>
+                <input type="checkbox" />テスト12
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div class="desc">
+        テーブルでは無く、div等かつ同一タグで入れ子
+    </div>
+    <div id="divid">
+        <div class="test">テスト1
+            <input type="checkbox" />
+        </div>
+        <div class="test">テスト2
+            <input type="checkbox" />
+        </div>
+        <div class="test">テスト3
+            <input type="checkbox" />
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
