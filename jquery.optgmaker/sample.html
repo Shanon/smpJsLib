@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>optgmaker</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.optgmaker.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var toiMap = [
+        [4, 12, '製造業'],
+        [13, 18, '情報サービス業'],
+        [19, 21, '通信サービス業'],
+        [22, 23, '卸売業・小売業'],
+        [33, 39, '医療・福祉']
+    ];
+    $('select[name="yourname2"] option').optgmaker(toiMap);
+});
+</script>
+<style type="text/css">
+select {
+    margin-bottom:20px;
+}
+
+#head {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#main {
+    width: 800px;
+    margin:0 auto;
+}
+
+#demo {
+    background:#F0F0F0;
+    padding:10px;
+}
+
+.desc {
+    border:1px solid #D8D8D8;
+    padding:8px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+</style>
+</script>
+</head>
+<body>
+<div id="main">
+<h1>optgmaker</h1>
+<div id="head">
+    optionの指定した範囲をoptgroupで囲みます。
+</div>
+<div id="demo">
+    <div class="desc">
+        何もしていない状態のselect要素
+    </div>
+    <select name="yourname1">
+        <option value="0"></option>
+        <option value="1">農林水産業・鉱業</option>
+        <option value="2">建設業</option>
+        <option value="3">商社</option>
+        <option value="4">コンピュータ関連機器製造業</option>
+        <option value="5">コンピュータ関連ソフトウェア製造業</option>
+        <option value="6">電子部品・デバイス・電子回路製造業</option>
+        <option value="7">電気機器製造業</option>
+        <option value="8">自動車・輸送用機器製造業</option>
+        <option value="9">産業用・事務用機器製造業</option>
+        <option value="10">食品・化学・薬品製造業</option>
+        <option value="11">素材・エネルギー関連製造業</option>
+        <option value="12">その他の製造業</option>
+        <option value="13">パッケージソフトウェア業</option>
+        <option value="14">SI（システムインテグレータ）</option>
+        <option value="15">受託開発・情報処理</option>
+        <option value="16">組み込みソフトウェア業</option>
+        <option value="17">ITコンサルティング業</option>
+        <option value="18">その他情報処理・情報サービス業</option>
+        <option value="19">通信事業者</option>
+        <option value="20">ISP・iDC・SaaS・クラウド事業者</option>
+        <option value="21">その他通信サービス業</option>
+        <option value="22">コンピュータ関連製品販売業・リセラー</option>
+        <option value="23">その他卸売業・小売業</option>
+        <option value="24">電気・ガス・熱供給・水道業</option>
+        <option value="25">運輸業・郵便業</option>
+        <option value="26">金融業・保険業</option>
+        <option value="27">不動産業・物品賃貸業</option>
+        <option value="28">宿泊業・飲食サービス業</option>
+        <option value="29">生活関連サービス業・娯楽業</option>
+        <option value="30">専門・技術サービス業</option>
+        <option value="31">新聞・出版・放送・メディア・広告業</option>
+        <option value="32">教育・学習支援業</option>
+        <option value="33">医師（開業医）</option>
+        <option value="34">医師（勤務医）</option>
+        <option value="35">歯科医</option>
+        <option value="36">看護師</option>
+        <option value="37">医療事務員</option>
+        <option value="38">介護職／ホームヘルパー</option>
+        <option value="39">そのほか（作業療法士、理学療法士など）</option>
+        <option value="40">その他のサービス業</option>
+        <option value="41">政府／官公庁／団体</option>
+        <option value="42">その他の業種</option>
+        <option value="43">自由業</option>
+        <option value="44">主婦・主夫</option>
+        <option value="45">学生</option>
+        <option value="46">無職</option>
+    </select>
+    <br />
+    <div class="desc">
+        optgroupを追加したselect要素
+    </div>
+    <select name="yourname2">
+        <option value="0"></option>
+        <option value="1">農林水産業・鉱業</option>
+        <option value="2">建設業</option>
+        <option value="3">商社</option>
+        <option value="4">コンピュータ関連機器製造業</option>
+        <option value="5">コンピュータ関連ソフトウェア製造業</option>
+        <option value="6">電子部品・デバイス・電子回路製造業</option>
+        <option value="7">電気機器製造業</option>
+        <option value="8">自動車・輸送用機器製造業</option>
+        <option value="9">産業用・事務用機器製造業</option>
+        <option value="10">食品・化学・薬品製造業</option>
+        <option value="11">素材・エネルギー関連製造業</option>
+        <option value="12">その他の製造業</option>
+        <option value="13">パッケージソフトウェア業</option>
+        <option value="14">SI（システムインテグレータ）</option>
+        <option value="15">受託開発・情報処理</option>
+        <option value="16">組み込みソフトウェア業</option>
+        <option value="17">ITコンサルティング業</option>
+        <option value="18">その他情報処理・情報サービス業</option>
+        <option value="19">通信事業者</option>
+        <option value="20">ISP・iDC・SaaS・クラウド事業者</option>
+        <option value="21">その他通信サービス業</option>
+        <option value="22">コンピュータ関連製品販売業・リセラー</option>
+        <option value="23">その他卸売業・小売業</option>
+        <option value="24">電気・ガス・熱供給・水道業</option>
+        <option value="25">運輸業・郵便業</option>
+        <option value="26">金融業・保険業</option>
+        <option value="27">不動産業・物品賃貸業</option>
+        <option value="28">宿泊業・飲食サービス業</option>
+        <option value="29">生活関連サービス業・娯楽業</option>
+        <option value="30">専門・技術サービス業</option>
+        <option value="31">新聞・出版・放送・メディア・広告業</option>
+        <option value="32">教育・学習支援業</option>
+        <option value="33">医師（開業医）</option>
+        <option value="34">医師（勤務医）</option>
+        <option value="35">歯科医</option>
+        <option value="36">看護師</option>
+        <option value="37">医療事務員</option>
+        <option value="38">介護職／ホームヘルパー</option>
+        <option value="39">そのほか（作業療法士、理学療法士など）</option>
+        <option value="40">その他のサービス業</option>
+        <option value="41">政府／官公庁／団体</option>
+        <option value="42">その他の業種</option>
+        <option value="43">自由業</option>
+        <option value="44">主婦・主夫</option>
+        <option value="45">学生</option>
+        <option value="46">無職</option>
+    </select>
+</div>
+</div>
+</body>
+</html>
