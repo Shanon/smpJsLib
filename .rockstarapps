@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rockstarapps>
+    
+
+
+
+
+
+
+
+
+
+
+<file name="jquery.notnull/jquery.notnull.js">
+        <min>false</min>
+        <comp>false</comp>
+        <closureCompiler>true</closureCompiler>
+        <gZip>true</gZip>
+        <resolveImports>false</resolveImports>
+        <urlRewriting>false</urlRewriting>
+        <autoBuild>false</autoBuild>
+        <lineLength>-1</lineLength>
+        <autoTimestamps>false</autoTimestamps>
+        <removeLogs>true</removeLogs>
+        <oldFileNames>false</oldFileNames>
+        <dependencies>
+            <file>jquery.notnull/jquery.notnull.js</file>
+        </dependencies>
+        <properties/>
+    </file>
+</rockstarapps>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>notnull</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.notnull.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        //$('#texttest input').notnull();
+        //$('#radiotest input').notnull();
+        //$('#checkboxtest input').notnull();
+        $('#selecttest select').notnull('セレクトのエラーです。');
+    });
+</script>
+<style type="text/css">
+#head {
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+#main {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#demo {
+	background: #F0F0F0;
+	padding: 10px;
+}
+
+.desc {
+	border: 1px solid #D8D8D8;
+	padding: 8px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+table {
+	border: 1px solid #999;
+	border-collapse: collapse;
+}
+
+table td {
+	border: 1px solid #999;
+	padding: 8px;
+}
+
+div.wline {
+	height: 0px;
+	border-top: 1px solid #f9f9f9;
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+</style>
+</script>
+</head>
+<body>
+	<div id="main">
+		<h1>notnull</h1>
+		<div id="head">
+			javascriptで行う単純必須チェックです。<br /> サーバーサイドでの必須チェック以外に何かしらの理由で必要なときにと利用ください。
+		</div>
+		<div id="demo">
+			<div class="desc">submitはダミーです。</div>
+			<form action="./">
+				<div id="texttest">
+					テキスト型のテスト<br /> <input type="text" />
+				</div>
+				<br />
+				<div class="wline"></div>
+				<br />
+				<div id="radiotest">
+					ラジオ型のテスト<br /> <input type="radio" name="test1" />選択肢1 <input type="radio" name="test1" />選択肢2
+				</div>
+				<br />
+				<div class="wline"></div>
+				<br />
+				<div id="checkboxtest">
+					チェックボックス型のテスト <br /> <input type="checkbox" value="1" />test1 <input type="checkbox" value="2" />test2 <input type="checkbox" value="3" />test3
+					<input type="checkbox" value="4" />test4 <input type="checkbox" value="5" />test5
+				</div>
+				<br />
+				<div class="wline"></div>
+				<br />
+				<div id="selecttest">
+					セレクト型のテスト <br /> <select name="test" id="">
+						<option value="0">null</option>
+						<option value="1">test1</option>
+						<option value="2">test2</option>
+						<option value="3">test3</option>
+						<option value="4">test4</option>
+						<option value="5">test5</option>
+					</select>
+				</div>
+				<br /> <input type="submit" value="submit" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>

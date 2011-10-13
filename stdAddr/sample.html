@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>smp.stdAddr</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./smp.stdAddr.js"></script>
+<style type="text/css">
+#head {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#main {
+    width: 800px;
+    margin:0 auto;
+}
+
+#demo {
+    background:#F0F0F0;
+    padding:10px;
+}
+
+.desc {
+    border:1px solid #D8D8D8;
+    padding:8px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+table {
+    border:1px solid #999;
+    border-collapse: collapse;
+}
+
+table td{
+    border:1px solid #999;
+    padding: 8px;
+}
+</style>
+</script>
+</head>
+<body>
+<div id="main">
+<h1>smp.stdAddr</h1>
+<div id="head">
+マーケティングプラットフォームの検索結果ページへのリンクに対して、開催日のパラメータを追加するJSです。
+</div>
+<div id="demo">
+    <div class="desc">
+    リンク指定のサンプル
+    </div>
+    <a href="https://demo-murao4.smartseminar.jp/public/seminar/list?order_key=date&order=2" class="smp_link">リンクのサンプル</a>
+    <br />
+</div>
+</div>
+<script type="text/javascript" src="./smp.stdAddr.js"></script>
+<script type="text/javascript">
+console.log(smp_stdAddr.add('smp_link'));
+</script>
+</body>
+</html>
