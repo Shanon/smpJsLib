@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>notnull</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./mpdateutl.js"></script>
+<script type="text/javascript">
+    var tmpdate = '2011-11-21 16:14:17';
+    var tmpdate2 = '2011-11-18 16:14:17';
+    var dd = mpdateutl.date(tmpdate);
+    console.log(mpdateutl.separate(dd));
+    console.log(mpdateutl.diff(tmpdate, tmpdate2));
+
+</script>
+<style type="text/css">
+#head {
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+#main {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#demo {
+	background: #F0F0F0;
+	padding: 10px;
+}
+
+.desc {
+	border: 1px solid #D8D8D8;
+	padding: 8px;
+	margin-bottom: 20px;
+}
+
+table {
+	border: 1px solid #999;
+	border-collapse: collapse;
+}
+
+table td {
+	border: 1px solid #999;
+	padding: 8px;
+}
+
+div.wline {
+	height: 0px;
+	border-top: 1px solid #f9f9f9;
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+</style>
+</head>
+<body>
+	<div id="main">
+		<h1>mp.dateutl</h1>
+
+		<div id="head">
+            MP上で日付をいじる時に利用するtooltip
+		</div>
+		<div id="demo">
+            MPとpacsjamの日付を扱う事を前提としています。 <br>
+            <p>
+            <strong>mpdateutl.date(text)</strong> <br>
+                MP,pacsjamから出力されるテキスト(2011-11-21 16:14:17)を日付型に変換します。 <br>
+            </p>
+			<div class="desc">
+                var tmpdate = '2011-11-21 16:14:17'; <br>
+                mpdateutl.date(tmpdate);
+			</div>
+            <p>
+                <strong>mpdateutl.separate(text || date)</strong> <br>
+                MPの文字列もしくは日付型オブジェクトを渡すと、配列で年,月,日,曜日,時,分が返ります。 <br>
+                2011年11月21日 14時15分 みたいに希望する形式で出力したいときに使います。
+            </p>
+            <div class="desc">
+                var tmpdate = '2011-11-21 16:14:17'; <br>
+                var separeted = mpdateutl.date(tmpdate);
+                document.write(separeted[0] + '年' + separeted[1] + '月'.......);
+                <br>
+                みたいな感じ
+            </div>
+            <p>
+                <strong>mpdateutl.diff(obj1, obj2)</strong> <br>
+                渡された2つの差分を求めます。 <br>
+                現状は差分の日数を返します。
+            </p>
+            <div class="desc">
+                var tmpdate = '2011-11-21 16:14:17'; <br>
+                var tmpdate2 = new Date(); <br>
+                mpdateutl.diff(tmpdate, tmpdate2));
+            </div>
+	</div>
+</body>
+</html>
