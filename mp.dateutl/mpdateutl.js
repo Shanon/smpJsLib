@@ -1,17 +1,31 @@
 var mpdateutl = (function() {
     var days_pattern = ["日","月","火","水","木","金","土"];
 
+    var isArray = function(input) {
+        return Object.prototype.toString.call(input) === '[object Array]';
+    };
+
     return {
         /*
         受け取った文字列を日付型にして返す
         文字列はMP出力もしくはpacsjamを想定
          */
-        date: function(str) {
-            var year = ((str.match(/^..../, '')[0]) - 0);
-            var month = ((str.match(/-(.*?)-/)[1]) - 1);
-            var day = ((str.match(/-(..)(\s|T)/)[1]) - 0);
-            var hour = ((str.match(/(..):/)[1]) - 0);
-            var minute = ((str.match(/:(..)/)[1]) - 0);
+        date: function(obj) {
+            var year, month, day, hour, minute;
+
+            if(isArray(obj) === false) {
+                year = ((obj.match(/^..../, '')[0]) - 0);
+                month = ((obj.match(/-(.*?)-/)[1]) - 1);
+                day = ((obj.match(/-(..)(\s|T)/)[1]) - 0);
+                hour = ((obj.match(/(..):/)[1]) - 0);
+                minute = ((obj.match(/:(..)/)[1]) - 0);
+            } else {
+                year = obj[0];
+                month = obj[1] - 1;
+                day = obj[2];
+                hour = obj[4];
+                minute = obj[5];
+            }
 
             return new Date(year, month, day, hour, minute);
         },
@@ -32,19 +46,41 @@ var mpdateutl = (function() {
         [year,month,day,hour,minute,days]
         文字列と日付型を考慮
          */
-        separate: function(obj) {
+        separate: function(date) {
             //文字列が渡されている場合は、一度日付型にする。
             //曜日を取得するために必要
-            obj = this.checkDate(obj);
+            date = this.checkDate(date);
 
-            var year = obj.getFullYear();
-            var month = obj.getMonth() + 1;
-            var date = obj.getDate();
-            var days = days_pattern[obj.getDay()];
-            var hours = obj.getHours();
-            var minutes = obj.getMinutes();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var dates = date.getDate();
+            var days = days_pattern[date.getDay()];
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
 
-            return [year, month, date, days, hours, minutes];
+            return [year, month, dates, days, hours, minutes];
+        },
+        /*
+        指定された形式で加算を行う。
+         */
+        add: function(date, num, format) {
+            var date_arr = this.separate(date);
+
+            switch(format) {
+                case 'y':
+                    date_arr[0] += num;
+                    break;
+
+                case 'm':
+                    date_arr[1] += num;
+                    break;
+
+                case 'd':
+                    date_arr[2] += num;
+                    break;
+            }
+
+            return this.date(date_arr);
         },
 
         /*
