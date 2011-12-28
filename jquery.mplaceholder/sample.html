@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>fhconvert test</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.mplaceholder.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('input').mplaceholder();
+});
+</script>
+<style type="text/css">
+#head {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#main {
+    width: 800px;
+    margin:0 auto;
+}
+
+#demo {
+    background:#F0F0F0;
+    padding:10px;
+}
+
+#desc {
+    border:1px solid #D8D8D8;
+    padding:8px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+</style>
+</head>
+<body>
+<div id="main">
+    <h1>fhconvert plugin</h1>
+    <div id="head">
+        値を半角 → 全角、 全角 → 半角等に変換するプラグイン。<br />
+        blur等と組合せての利用を推奨
+    </div>
+    <div id="demo">
+    <table width="100%" border="0" cellpadding="0" cellspacing="1" class="ss_formprivacy">
+                <tbody><tr>
+      <th>氏名</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><span class="ss_leftComment">姓：</span><input type="text" name="Public::Application::User_D__P__D_name1" size="20" maxlength="20"></li></div><div><li class="ss_input"><span class="ss_leftComment">名：</span><input type="text" name="Public::Application::User_D__P__D_name2" size="20" maxlength="20"><span class="ss_rightComment">全角<br>（例　姓：山田　名：太郎）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>氏名（フリガナ）</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><span class="ss_leftComment">姓：</span><input type="text" name="Public::Application::User_D__P__D_name1_ka" size="20" maxlength="20"></li></div><div><li class="ss_input"><span class="ss_leftComment">名：</span><input type="text" name="Public::Application::User_D__P__D_name2_ka" size="20" maxlength="20"><span class="ss_rightComment">全角カタカナ<br>（例　姓：ヤマダ　名：タロウ）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>会社名</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_company_name" size="40" maxlength="100"><span class="ss_rightComment">（例　山田株式会社）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>役職</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_position" size="40" maxlength="100"><span class="ss_rightComment">（例　部長）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>郵便番号</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_zip1" size="3" maxlength="3"></li></div><div><li class="ss_input"><span class="ss_leftComment">-</span><input type="text" name="Public::Application::User_D__P__D_zip2" size="4" maxlength="4"><span class="ss_rightComment">半角数字 （例　123-4567）</span></li></div></ul></div></td>
+    </tr>
+    <tr>
+      <th>市区郡</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_address1" size="40" maxlength="100"><span class="ss_rightComment">（例　港区赤坂）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>町村番地</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_address2" size="40" maxlength="100"><span class="ss_rightComment">（例　1-2-3）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>ビル・マンション名</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_address3" size="40" maxlength="100"><span class="ss_rightComment">（例　ABCビル2F）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>電話番号</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_tel" size="20" maxlength="20"><span class="ss_rightComment">半角数字（例　01-2345-6789）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>ファックス番号</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><div class="ss_upComment">半角数字（例　01-2345-6789）</div><input type="text" name="Public::Application::User_D__P__D_fax" size="20" maxlength="20"><span class="ss_rightComment">半角数字（例　01-2345-6789）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>E-mail</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_email" size="40" maxlength="100"><span class="ss_rightComment">半角文字<br>(例　user@smartseminar.jp)</span><div class="ss_bottomComment">※E-mailアドレスの入力間違いが多くなっております。ご注意ください。</div></li></div></ul></div></td>
+    </tr><tr>
+      <th>E-mail（確認用）</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_email_conf" size="40" maxlength="100"><div class="ss_bottomComment">※確認のためもう一度E-mailアドレスを入力してください</div></li></div></ul></div></td>
+    </tr><tr>
+      <th>資料送付・各種情報案内を希望しますか</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="radio" name="Public::Application::User_D__P__D_permission_type_master_id" value="1" checked="checked">希望する <input type="radio" name="Public::Application::User_D__P__D_permission_type_master_id" value="2">希望しない</li></div></ul></div></td>
+    </tr><tr>
+      <th>新項目</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="checkbox" name="Public::Application::User_D__P__D_VisitorData.attribute1" value="1">選 択 肢 1<br> <input type="checkbox" name="Public::Application::User_D__P__D_VisitorData.attribute1" value="2">選　択　肢　2<br> <input type="checkbox" name="Public::Application::User_D__P__D_VisitorData.attribute1" value="3">3　　　　　　個 目<br></li></div></ul></div></td>
+    </tr><tr>
+      <th>ラジオボタンのテスト項目</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="radio" name="Public::Application::User_D__P__D_VisitorData.attribute2" value="1">1つめ選択肢<br> <input type="radio" name="Public::Application::User_D__P__D_VisitorData.attribute2" value="2">2つめ選択肢<br> <input type="radio" name="Public::Application::User_D__P__D_VisitorData.attribute2" value="3">3つめ選択肢<br></li></div></ul></div></td>
+    </tr><tr>
+      <th>テキスト型の新規項目テスト</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_VisitorData.attribute3" size="" maxlength=""></li></div></ul></div></td>
+    </tr>
+              </tbody></table>
+    </div>
+</div>
+</body>
+</html>
