@@ -8,7 +8,7 @@
 (function($) {
     // placeholder属性をサポートしているか判断。
     var isPlaceHolder = !!('placeholder' in document.createElement('input'));
-    $.fn['mplaceholder'] = function(options) {
+    $.fn.mplaceholder = function(options) {
         var $obj = this;
         var settings;
 
@@ -28,13 +28,13 @@
 
                 settings = {
                     selector: _selector,
-                    parentTag: 'td',
+                    parentTag: 'li',
                     css:{'color': '#999'}
                 };
             } else {
                 settings = $.extend({
                     selector: '.ss_upComment',
-                    parentTag: 'td',
+                    parentTag: 'li',
                     css: {'color': '#999'}
                 }, options);
             }
@@ -54,6 +54,7 @@
                     $targets.push($target);
 
                     this.setPlaceText();
+                    this.setdefaultColors();
                 },
 
                 setPlaceText: function() {
@@ -68,8 +69,13 @@
                     defaultColors.push($obj.css('color'));
                 },
 
-                css: function(n, obj) {
-                    $objs[n].css(obj);
+                inputAct: function($obj, n) {
+                    $this = $obj;
+                    console.log($this);
+                    if($this.val() === placetexts[n]) {
+                        $this.val('');
+                    }
+                    $this.css({color: defaultColors[n]});
                 },
 
                 addFocus: function(n) {
@@ -99,22 +105,25 @@
                 },
 
                 addInputVal: function(n) {
-                    this.css(n, settings.css);
-                    $objs[n].val(this.getPlaceText(n));
+                    $this = $objs[n];
+
+                    if($this.val() === '') {
+                        $this.val(this.getPlaceText(n));
+                        $this.css(settings.css);
+                    }
                 },
 
-                addSubmit: function() {
-                    $('form').submit(function() {
-                        for(var i = 0; i < $objs.length; i++) {
-                            var $this = $objs[i];
+                addSubmit: function(n) {
 
-                            if($this.val() === placetexts[n]) {
-                                $this.val('');
-                            }
+                    $('form').submit(function() {
+                        var $this = $objs[n];
+
+                        if($this.val() === placetexts[n]) {
+                            $this.val('');
                         }
                     });
                 }
-            }
+            };
         }());
 
         setOption(options);
@@ -124,7 +133,7 @@
             makePlaceHolder.init($this);
 
             // 対象セレクタの文字列が空の場合は、次へ
-            if(makePlaceHolder.getPlaceText($this) === '') {
+            if(makePlaceHolder.getPlaceText(n) === '') {
                 return true;
             }
 
@@ -132,19 +141,14 @@
              <placeholder属性をサポートしている場合の処理>
              */
             //セレクターのテキストをplaceholder属性に上書きして次へ
-            /*
             if (!!isPlaceHolder) {
                 makePlaceHolder.addAttr(n);
                 return true;
             }
-            */
 
             /*
             <placeholder属性をサポートしていない場合の処理>
              */
-
-            //通常のinputのためにデフォルトのinput colorを取得しておく。
-            makePlaceHolder.setdefaultColors();
 
             // inputにテキストを設置(初期表示)
             makePlaceHolder.addInputVal(n);
@@ -158,9 +162,12 @@
             // inputが空ならplacetextを追加する
             makePlaceHolder.addBlur(n);
 
+            // submit時にplacetextのままなら空白にする
+            makePlaceHolder.addSubmit(n);
+
         });
 
-        makePlaceHolder.addSubmit();
+        //makePlaceHolder.addSubmit();
 
         return this;
     };
