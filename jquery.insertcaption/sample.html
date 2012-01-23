@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>insertCaption</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.insertcaption.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('.addcaption').insertCaption();
+});
+</script>
+<style type="text/css">
+#head {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#main {
+    width: 800px;
+    margin:0 auto;
+}
+
+#demo {
+    background:#F0F0F0;
+    padding:10px;
+}
+
+#desc {
+    border:1px solid #D8D8D8;
+    padding:8px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.in_class {
+    background-color:red;
+}
+</style>
+</head>
+<body>
+<div id="main">
+    <h1>insertCaption plugin</h1>
+    <div id="head">
+        allitem等、配列吐き出し部分にキャプションを入れる
+    </div>
+    <div id="demo">
+    <table width="100%" border="0" cellpadding="0" cellspacing="1" class="ss_formprivacy">
+        <tbody>
+            <tr class="addcaption" data-insert-caption='<tr><td colspan="2">test</td></tr>'>
+      <th>会社名</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_company_name" size="40" maxlength="100"><span class="ss_rightComment">（例　山田株式会社）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>役職</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_position" size="40" maxlength="100"><span class="ss_rightComment">（例　部長）</span></li></div></ul></div></td>
+      </tr>
+            <tr class="addcaption" data-insert-caption='<tr><td class="in_class" colspan="2">telNo</td></tr>'>
+      <th>電話番号</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_tel" size="20" maxlength="20"><span class="ss_rightComment">半角数字（例　01-2345-6789）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>ファックス番号</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><div class="ss_upComment">半角数字（例　01-2345-6789）</div><input type="text" name="Public::Application::User_D__P__D_fax" size="20" maxlength="20"><span class="ss_rightComment">半角数字（例　01-2345-6789）</span></li></div></ul></div></td>
+    </tr><tr>
+      <th>E-mail</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_email" size="40" maxlength="100"><span class="ss_rightComment">半角文字<br>(例　user@smartseminar.jp)</span><div class="ss_bottomComment">※E-mailアドレスの入力間違いが多くなっております。ご注意ください。</div></li></div></ul></div></td>
+    </tr><tr>
+      <th>E-mail（確認用）</th>
+      <td><div class="ss_cell"><ul><div><li class="ss_input"><input type="text" name="Public::Application::User_D__P__D_email_conf" size="40" maxlength="100"><div class="ss_bottomComment">※確認のためもう一度E-mailアドレスを入力してください</div></li></div></ul></div></td>
+      </tr>
+              </tbody></table>
+    </div>
+</div>
+</body>
+</html>
