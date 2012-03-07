@@ -2,35 +2,63 @@
    $.fn.pullvalue = function() {
        var $OBJ = this;
 
-       var textGet = function($obj) {
-           var type = $obj.attr('type');
-           var returnText = '';
-
-           if(type === 'text' || $obj[0].tagName === 'TEXTAREA') {
-               return $obj.val();
-           } else if(type === 'radio') {
-               $obj.each(function() {
-                   var $this = $(this);
-                   if($this.attr('checked') === 'checked') {
-                       returnText = $this[0].nextSibling.nodeValue;
+       var valUtl = {
+           // todo select and textarea and checkbox
+           get: function($obj) {
+               var tagName = $obj[0].tagName, inputType;
+               
+               if(tagName === 'INPUT') {
+                   inputType = $obj.attr('type');
+                   
+                   if(inputType === 'text') {
+                       return $obj.val();
+                   } else if(inputType === 'radio') {
+                       return  $obj.filter(':checked')[0].nextSibling.nodeValue;
                    }
-               });
-
-               return returnText;
+               }
+           },
+           
+           set: function($obj, value) {
+               var tagName = $obj[0].tagName, inputType;
+               
+               if(tagName === 'INPUT') {
+                   inputType = $obj.attr('type');
+                   
+                   if(inputType === 'text') {
+                       $obj.val(value);
+                   } else if(inputType === 'radio') {
+                       $obj.each(function() {
+                           var $this = $(this);
+                           if($this[0].nextSibling.nodeValue.match(value)) {
+                               $this.attr('checked', true);
+                               return false;
+                           }
+                       });
+                   }
+               }
+           }
+       };
+       
+       // not test other input...
+       var targetSearch = function($obj) {
+           if($obj.find('input').size() > 0) {
+               return $obj.find('input');
+           } else if($obj.find('select').size() > 0) {
+               return $obj.find('select');
+           } else if($obj.find('textarea').size() > 0) {
+               return $obj.find('textarea');
            }
        };
 
-       $('form').submit(function() {
-           $OBJ.each(function() {
-               var $this = $(this);
-               var $mastar = $this.find('input');
-               var pullTargetSelector = $this.data('pullvalue');
-               var $pullTarget = $(pullTargetSelector);
+       $OBJ.each(function() {
+           var $this = $(this);
+           var $mastar = targetSearch($this);
+           var pullTargetSelector = $this.data('pullvalue');
+           var $pullTarget = $(pullTargetSelector);
 
-               var pullText = textGet($pullTarget);
+           var pullText = valUtl.get($pullTarget);
 
-               $mastar.val(pullText);
-           });
+           valUtl.set($mastar, pullText);
        });
 
        return this;

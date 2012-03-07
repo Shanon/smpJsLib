@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>pullvalue</title>
+<style type="text/css">
+#head {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#main {
+    width: 800px;
+    margin:0 auto;
+}
+
+#demo {
+    background:#F0F0F0;
+    padding:10px;
+}
+
+.desc {
+    border:1px solid #D8D8D8;
+    padding:8px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+table {
+    border:1px solid #999;
+    border-collapse: collapse;
+}
+
+table td{
+    border:1px solid #999;
+    padding: 8px;
+}
+</style>
+</script>
+</head>
+<body>
+<div id="main">
+<h1>pullvalue</h1>
+<div id="head">
+    データの値を対象から抜いてきます。
+    複数の値に対応する予定なので、引くことになってます。
+</div>
+<div id="demo">
+    from:text to:text
+    <br />
+    <div id="from1">
+    from:
+    <input type="text" width="40" />
+    </div>
+    <div id="to1" data-pullvalue="#from1 input">
+    to:
+    <input type="text" width="40" />
+    </div>
+    　<input type="button" onclick="pullact('#to1')" value="action" />
+    <br />
+    <br />
+    from:radio to:text
+    <br />
+    <div id="from2">
+    from:
+    <input type="radio" name="radio1">radio value1 <input type="radio" name="radio1">radio value2
+    </div>
+    <div id="to2" data-pullvalue="#from2 input">
+    to:
+    <input type="text" width="40" />
+    </div>
+    　<input type="button" onclick="pullact('#to2')" value="action" />
+    <br />
+    <br />
+    from:text to:radio
+    <br />
+    <div id="from3">
+    from:<input type="text" width="40" />
+    </div>
+    <div id="to3" data-pullvalue="#from3 input">
+    to:
+    <input type="radio" name="radio1">radiovalue1<input type="radio" name="radio1">radiovalue2
+    </div>
+    　<input type="button" onclick="pullact('#to3')" value="action" />
+</div>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.pullvalue.js"></script>
+<script type="text/javascript">
+    var pullact = function(selector) {
+        $(selector).pullvalue();
+    };
+</script>
+</body>
+</html>
