@@ -11,14 +11,17 @@ var mpdateutl = (function() {
         文字列はMP出力もしくはpacsjamを想定
          */
         date: function(obj) {
-            var year, month, day, hour, minute;
+            var year, month, day, hour = 0, minute = 0;
 
             if(isArray(obj) === false) {
                 year = ((obj.match(/^..../, '')[0]) - 0);
                 month = ((obj.match(/-(.*?)-/)[1]) - 1);
-                day = ((obj.match(/-(..)(\s|T)/)[1]) - 0);
-                hour = ((obj.match(/(..):/)[1]) - 0);
-                minute = ((obj.match(/:(..)/)[1]) - 0);
+                day = ((obj.match(/-(..)(\s|T|$)/)[1]) - 0);
+
+                if (obj.length > 10) {
+                    hour = ((obj.match(/(..):/)[1]) - 0);
+                    minute = ((obj.match(/:(..)/)[1]) - 0);
+                }
             } else {
                 year = obj[0];
                 month = obj[1] - 1;
@@ -91,5 +94,5 @@ var mpdateutl = (function() {
             date2 = this.checkDate(date2);
             return (date1.getTime() - date2.getTime()) / 86400000;
         }
-    }
+    };
 }());
