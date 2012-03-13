@@ -81,6 +81,35 @@ table td{
     <input type="radio" name="radio1">radiovalue1<input type="radio" name="radio1">radiovalue2
     </div>
     　<input type="button" onclick="pullact('#to3')" value="action" />
+
+    <br />
+    <br />
+    from:select to:text
+    <br />
+<div id="from4">
+from:
+<select name="Seminar_D__1__D_seminar_category_master_id">
+<option value=""></option>
+<option value="1">セレクト1</option>
+<option value="2">セレクト2</option>
+<option value="3">セレクト3</option>
+</select>
+</div>
+<div id="to4" data-pullvalue="#from4 select">
+to:
+<input type="text" width="40" />
+</div>
+<br />
+    　<input type="button" onclick="pullact('#to4')" value="action" />
+<br />
+<br />
+複数
+<div id="to5" data-pullvalue='["#from1 input", "#from2 input", "#from3 input", "#from4 select"]'>
+to:
+<input type="text" width="40" />
+</div>
+<br />
+    　<input type="button" onclick="pullact('#to5')" value="action" />
 </div>
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
