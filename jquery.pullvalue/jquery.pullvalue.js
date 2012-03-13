@@ -30,7 +30,7 @@
                     } else if (inputType === 'radio') {
                         $obj.each(function() {
                             var $this = $(this);
-                            if ($this[0].nextSibling.nodeValue.match(value)) {
+                            if (value !== '' && $this[0].nextSibling.nodeValue.match(value)) {
                                 $this.attr('checked', true);
                                 return false;
                             }
