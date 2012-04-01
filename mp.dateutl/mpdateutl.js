@@ -39,9 +39,9 @@ var mpdateutl = (function() {
          */
         checkDate: function(obj) {
             if (!!obj.getMonth) {
-                return obj;
+                return new Date(obj);
             } else {
-                return this.date(obj);
+                return new Date(this.date(obj));
             }
         },
         /*
@@ -67,23 +67,24 @@ var mpdateutl = (function() {
         指定された形式で加算を行う。
          */
         add: function(date, num, format) {
-            var date_arr = this.separate(date);
+            date = this.checkDate(date);
 
             switch(format) {
                 case 'y':
-                    date_arr[0] += num;
-                    break;
+                    date.setFullYear(date.getFullYear() + num);
+                break;
 
                 case 'm':
-                    date_arr[1] += num;
-                    break;
+                    date.setMonth(date.getMonth() + num);
+                break;
 
                 case 'd':
-                    date_arr[2] += num;
-                    break;
+                    date.setDate(date.getDate() + num);
+                break;
             }
 
-            return this.date(date_arr);
+            // return this.date(date_arr);
+            return date;
         },
 
         /*
