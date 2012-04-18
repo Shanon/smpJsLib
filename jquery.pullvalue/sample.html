@@ -110,13 +110,55 @@ to:
 </div>
 <br />
     　<input type="button" onclick="pullact('#to5')" value="action" />
+
+<br />
+<br />
+一セレクタ内複数
+<div id="from6">
+    from:<input type="text" width="40" />　<input type="text" width="40" />
+</div>
+<div id="to6" data-pullvalue='#from6 input'>
+to:
+<input type="text" width="40" />
+</div>
+<br />
+    　<input type="button" onclick="pullact('#to6')" value="action" />
+
+
+<br />
+<br />
+セレクトtoセレクト
+<div id="from7">
+    from:
+<select name="Seminar_D__1__D_seminar_category_master_id">
+<option value=""></option>
+<option value="1">セレクト1</option>
+<option value="2">セレクト2</option>
+<option value="3">セレクト3</option>
+</select>
+</div>
+<div id="to7" data-pullvalue='#from7 select'>
+to:
+<select name="Seminar_D__1__D_seminar_category_master_id">
+<option value=""></option>
+<option value="1">セレクト1</option>
+<option value="2">セレクト2</option>
+<option value="3">セレクト3</option>
+</select>
+</div>
+<br />
+    　<input type="button" onclick="pullact('#to7')" value="action" />
+
 </div>
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript" src="./jquery.pullvalue.js"></script>
 <script type="text/javascript">
     var pullact = function(selector) {
-        $(selector).pullvalue();
+        var $this = $(selector),
+        pullvalueSelectors = $this.data('pullvalue');
+
+        $this.pullvalue(pullvalueSelectors, '-');
     };
 </script>
 </body>

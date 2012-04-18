@@ -25,9 +25,14 @@
        }, options);
 
        $obj.each(function() {
-           var $this = $(this);
-           var convertText = FHConvert[type]($this.val(), settings);
+           var $this, convertText;
+           $this = $(this);
 
+           if ($this.attr('type') !== 'text') {
+               return true;
+           }
+
+           convertText = FHConvert[type]($this.val(), settings);
            $this.val(convertText);
        });
 

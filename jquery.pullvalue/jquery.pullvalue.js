@@ -1,22 +1,52 @@
 (function($) {
-    $.fn.pullvalue = function() {
-        var joinString = ':';
+    $.fn.pullvalue = function(selectors, joinString) {
+        joinString = joinString || ':';
+
+        var getValue = function($obj) {
+            var tagName, inputType;
+
+            var getRadioValue = function($obj) {
+                var $checked;
+                $checked = $obj.filter(':checked');
+
+                if ($checked.size() === 0) {
+                    return '';
+                }
+
+                return $checked[0].nextSibling.nodeValue;
+            };
+
+            tagName = $obj[0].tagName;
+            if (tagName === 'INPUT') {
+                inputType = $obj.attr('type');
+
+                if (inputType === 'text') {
+                    return $obj.val();
+                } else if (inputType === 'radio') {
+                    return getRadioValue($obj);
+                }
+            } else if (tagName === 'SELECT') {
+                return $obj.find(':selected').text();
+            }
+        };
+
         var valUtl = {
             // todo select and textarea and checkbox
             get: function($obj) {
-                var tagName = $obj[0].tagName, inputType;
+                var value, values;
+                values = [];
 
-                if (tagName === 'INPUT') {
-                    inputType = $obj.attr('type');
+                $obj.each(function() {
+                    value = getValue($(this));
 
-                    if (inputType === 'text') {
-                        return $obj.val();
-                    } else if (inputType === 'radio') {
-                        return $obj.filter(':checked')[0].nextSibling.nodeValue;
+                    if (value === '') {
+                        return true;
                     }
-                } else if (tagName === 'SELECT') {
-                    return $obj.find(':selected').text();
-                }
+
+                    values.push(value);
+                });
+
+                return values.join(joinString);
             },
 
             set: function($obj, value) {
@@ -36,6 +66,15 @@
                             }
                         });
                     }
+                } else if (tagName === 'SELECT') {
+                    $obj.find('option').each(function() {
+                        var $this = $(this);
+
+                        if ($this.text() === value) {
+                            $this.attr('selected', true);
+                            return false;
+                        }
+                    });
                 }
             }
         };
@@ -54,15 +93,14 @@
         return this.each(function() {
             var $this = $(this),
             $mastar = targetSearch($this),
-            dataPullValue = $this.data('pullvalue'),
             pullTargetSelectors = [];
             pullTexts = [];
 
 
-            if (Object.prototype.toString.call(dataPullValue) !== '[object Array]') {
-                pullTargetSelectors.push(dataPullValue);
+            if (Object.prototype.toString.call(selectors) !== '[object Array]') {
+                pullTargetSelectors.push(selectors);
             } else {
-                pullTargetSelectors = dataPullValue;
+                pullTargetSelectors = selectors;
             }
 
             for (var i = 0, len = pullTargetSelectors.length; i < len; i++) {
