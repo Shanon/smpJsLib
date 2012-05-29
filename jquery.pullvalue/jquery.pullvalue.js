@@ -79,9 +79,11 @@
             }
         };
 
-        // not test other input...
         var targetSearch = function($obj) {
-            if ($obj.find('input').size() > 0) {
+            var tagName = $obj[0].tagName;
+            if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
+                return $obj;
+            } if ($obj.find('input').size() > 0) {
                 return $obj.find('input');
             } else if ($obj.find('select').size() > 0) {
                 return $obj.find('select');
