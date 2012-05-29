@@ -30,4 +30,38 @@
         strictEqual($to_text.val(), 'testvalue', 'Is copy');
     });
 
+
+    module('override option test', {
+        setup: function(){
+        },
+        teardown: function(){
+            $from_text.val('');
+            $to_text.val('');
+        }
+    });
+
+    test('override option true(not setting)', function() {
+        $from_text.val('testvalue1');
+        $to_text_div.pullvalue('#from_text');
+
+        strictEqual($to_text.val(), 'testvalue1', 'first copy');
+
+        $from_text.val('testvalue2');
+        $to_text_div.pullvalue('#from_text');
+
+        strictEqual($to_text.val(), 'testvalue2', 'second copy');
+    });
+
+    test('override option false', function() {
+        $from_text.val('testvalue1');
+        $to_text_div.pullvalue('#from_text', {'overRide': false});
+
+        strictEqual($to_text.val(), 'testvalue1', 'first copy');
+
+        $from_text.val('testvalue2');
+        $to_text_div.pullvalue('#from_text', {'overRide': false});
+
+        strictEqual($to_text.val(), 'testvalue1', 'second copy');
+    });
+
 }(jQuery));

@@ -1,37 +1,40 @@
 (function($) {
-    $.fn.pullvalue = function(selectors, joinString) {
-        joinString = joinString || ':';
+    var getValue = function($obj) {
+        var tagName, inputType;
 
-        var getValue = function($obj) {
-            var tagName, inputType;
+        var getRadioValue = function($obj) {
+            var $checked;
+            $checked = $obj.filter(':checked');
 
-            var getRadioValue = function($obj) {
-                var $checked;
-                $checked = $obj.filter(':checked');
-
-                if ($checked.size() === 0) {
-                    return '';
-                }
-
-                return $checked[0].nextSibling.nodeValue;
-            };
-
-            tagName = $obj[0].tagName;
-            if (tagName === 'INPUT') {
-                inputType = $obj.attr('type');
-
-                if (inputType === 'text') {
-                    return $obj.val();
-                } else if (inputType === 'radio') {
-                    return getRadioValue($obj);
-                }
-            } else if (tagName === 'SELECT') {
-                return $obj.find(':selected').text();
+            if ($checked.size() === 0) {
+                return '';
             }
+
+            return $checked[0].nextSibling.nodeValue;
         };
 
-        var valUtl = {
-            // todo select and textarea and checkbox
+        tagName = $obj[0].tagName;
+        if (tagName === 'INPUT') {
+            inputType = $obj.attr('type');
+
+            if (inputType === 'text') {
+                return $obj.val();
+            } else if (inputType === 'radio') {
+                return getRadioValue($obj);
+            }
+        } else if (tagName === 'SELECT') {
+            return $obj.find(':selected').text();
+        }
+    };
+
+    var valUtl = (function() {
+        var settings;
+
+        return {
+            setSettings: function(_settings) {
+                settings = _settings;
+            },
+
             get: function($obj) {
                 var value, values;
                 values = [];
@@ -46,11 +49,17 @@
                     values.push(value);
                 });
 
-                return values.join(joinString);
+                return values.join(settings.joinString);
             },
 
             set: function($obj, value) {
                 var tagName = $obj[0].tagName, inputType;
+
+                // value is not override if override option false and now value already exist
+                if (valUtl.get($obj) !== '' && settings.overRide === false) {
+                    return;
+                }
+
 
                 if (tagName === 'INPUT') {
                     inputType = $obj.attr('type');
@@ -78,19 +87,28 @@
                 }
             }
         };
+    }());
 
-        var targetSearch = function($obj) {
-            var tagName = $obj[0].tagName;
-            if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
-                return $obj;
-            } if ($obj.find('input').size() > 0) {
-                return $obj.find('input');
-            } else if ($obj.find('select').size() > 0) {
-                return $obj.find('select');
-            } else if ($obj.find('textarea').size() > 0) {
-                return $obj.find('textarea');
-            }
-        };
+    var targetSearch = function($obj) {
+        var tagName = $obj[0].tagName;
+        if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
+            return $obj;
+        } if ($obj.find('input').size() > 0) {
+            return $obj.find('input');
+        } else if ($obj.find('select').size() > 0) {
+            return $obj.find('select');
+        } else if ($obj.find('textarea').size() > 0) {
+            return $obj.find('textarea');
+        }
+    };
+
+    $.fn.pullvalue = function(selectors, options) {
+        var settings = $.extend({
+            'joinString': ':',
+            'overRide': true
+        }, options);
+
+        valUtl.setSettings(settings);
 
         return this.each(function() {
             var $this = $(this),
@@ -109,10 +127,10 @@
                 if ($(pullTargetSelectors[i]).size() === 0) {
                     continue;
                 }
-                pullTexts.push(valUtl.get($(pullTargetSelectors[i])));
+                pullTexts.push(valUtl.get($(pullTargetSelectors[i]), settings));
             }
 
-            valUtl.set($mastar, pullTexts.join(joinString));
+            valUtl.set($mastar, pullTexts.join(settings.joinString));
         });
     };
 }(jQuery));
