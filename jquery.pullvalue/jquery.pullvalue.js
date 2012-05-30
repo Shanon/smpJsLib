@@ -102,11 +102,17 @@
         }
     };
 
-    $.fn.pullvalue = function(selectors, options) {
+    $.fn.pullvalue = function(options) {
         var settings = $.extend({
             'joinString': ':',
             'overRide': true
         }, options);
+
+        // target selector initialize
+        if (typeof settings.selectors === 'undefined') {
+            settings.selectors = this.data('pullvalue');
+            console.log(settings);
+        }
 
         valUtl.setSettings(settings);
 
@@ -116,11 +122,10 @@
             pullTargetSelectors = [];
             pullTexts = [];
 
-
-            if (Object.prototype.toString.call(selectors) !== '[object Array]') {
-                pullTargetSelectors.push(selectors);
+            if (Object.prototype.toString.call(settings.selectors) !== '[object Array]') {
+                pullTargetSelectors.push(settings.selectors);
             } else {
-                pullTargetSelectors = selectors;
+                pullTargetSelectors = settings.selectors;
             }
 
             for (var i = 0, len = pullTargetSelectors.length; i < len; i++) {
