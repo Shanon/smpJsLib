@@ -2,6 +2,7 @@
     var $from_text = $('#from_text'),
     $to_text = $('#to_text'),
     $to_text_div = $('#to_text_div'),
+    $fromDiv = $('#from_div'),
     $dataAttr = $('#data_attr');
 
     module('text to text', {
@@ -17,9 +18,24 @@
         $to_text.pullvalue({'selectors': '#from_text'});
         strictEqual($to_text.val(), 'testvalue', 'Is copy');
     });
-    test('div tag test (serach input', function() {
+    test('div tag test (serach input)', function() {
         $to_text.pullvalue({'selectors': '#from_text'});
         strictEqual($to_text.val(), 'testvalue', 'Is copy');
+    });
+
+
+    module('div to text', {
+        setup: function(){
+            $fromDiv.text('testvalue');
+        },
+        teardown: function(){
+            $fromDiv.text('');
+            $to_text.val('');
+        }
+    });
+    test('input tag test', function() {
+        $to_text.pullvalue({'selectors': '#from_div'});
+        strictEqual($to_text.val(), 'testvalue');
     });
 
 
@@ -29,10 +45,10 @@
         },
         teardown: function(){
             $from_text.val('');
-            $to_text.val('');
+            $dataAttr.find('input').val('');
         }
     });
-    test('pull Down tag test', function() {
+    test('input tag test', function() {
         $dataAttr.pullvalue();
         strictEqual($dataAttr.find('input').val(), 'testvalue', 'Is copy');
     });

@@ -24,6 +24,8 @@
             }
         } else if (tagName === 'SELECT') {
             return $obj.find(':selected').text();
+        } else {
+            return $obj.text();
         }
     };
 
@@ -111,7 +113,6 @@
         // target selector initialize
         if (typeof settings.selectors === 'undefined') {
             settings.selectors = this.data('pullvalue');
-            console.log(settings);
         }
 
         valUtl.setSettings(settings);
