@@ -26,11 +26,10 @@ SHANON MARKETING PLATFORMのwebplugin用JavaScriptファイルです。
 コールバックの引数には、PACSJAMインスタンスが渡されます。  
 コールバック関数はカレンダーイベントオブジェクトを返して下さい。省略されたオブジェクトは標準のものが利用されます。
 
-例) 描画されるテキストをTitleとSubTitleに変更する場合(標準はタイトルのみ)
+例) 描画されるテキストをTitleとSubTitleに変更する場合(標準はTitleのみ)
 
-    var pj = new PacsJam(object);
     var pc = new PacsCal(pacsjamJson);
-    pc.eventMake(function() {
+    pc.eventMake(function(pj) {
         return {'title': pj.get('Title') + pj.get('SubTitle')};
     });
     pc.render($('#calendar'));
