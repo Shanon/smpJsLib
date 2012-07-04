@@ -1,6 +1,8 @@
 #PACS JAM
 SHANON MARKETING PLATFORMのwebplugin用JavaScriptファイルです。
 
+[Underscore.js](http://underscorejs.org/)に依存します。
+
 # PACS CAL (pacscal.js)
 カレンダープラグインです。
 
