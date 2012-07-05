@@ -5,6 +5,57 @@
     baseDate = mpdateutl.date('2012-01-01'),
     baseDateStr = '2012-01-01';
 
+    module('hyphen string test', {
+        setup: function() {
+            this.dateStr = '2012-01-02 03:04';
+            this.dateStr2 = '2012-02-03　04:05';
+            this.dateStr3 = '2012-03-04　05：06';
+        }
+    });
+
+    test('date check', function() {
+        var date = mpdateutl.date(this.dateStr);
+        strictEqual(date.getFullYear(), 2012);
+        strictEqual(date.getMonth(), 0);
+        strictEqual(date.getDate(), 2);
+        strictEqual(date.getHours(), 3);
+        strictEqual(date.getMinutes(), 4);
+    });
+
+    test('zenkaku space', function() {
+        var date = mpdateutl.date(this.dateStr2);
+        strictEqual(date.getFullYear(), 2012);
+        strictEqual(date.getMonth(), 1);
+        strictEqual(date.getDate(), 3);
+        strictEqual(date.getHours(), 4);
+        strictEqual(date.getMinutes(), 5);
+    });
+
+    test('zenkaku koron', function() {
+        var date = mpdateutl.date(this.dateStr3);
+        strictEqual(date.getFullYear(), 2012);
+        strictEqual(date.getMonth(), 2);
+        strictEqual(date.getDate(), 4);
+        strictEqual(date.getHours(), 5);
+        strictEqual(date.getMinutes(), 6);
+    });
+
+    module('slash string test', {
+        setup: function() {
+            this.dateStr = '2012/01/01 00:00'
+        }
+    });
+
+    test('date check', function() {
+        var date = mpdateutl.date(this.dateStr);
+
+        strictEqual(date.getFullYear(), 2012);
+        strictEqual(date.getMonth(), 0);
+        strictEqual(date.getDate(), 1);
+        strictEqual(date.getHours(), 0);
+        strictEqual(date.getMinutes(), 0);
+    });
+
     module('mpdateutl.add testing');
 
     test('base add test', function() {
