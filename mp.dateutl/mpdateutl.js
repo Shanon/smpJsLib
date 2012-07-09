@@ -12,26 +12,16 @@
 
         return {
             date: function(obj) {
-                var year, month, day, hour = 0, minute = 0;
+                var reg = /^(\d{4})(?:\x2d|\u002f)(\d{2})(?:\x2d|\u002f)(\d{2})(?:\s|T|$|\u3000)(\d{2})(?:\x3a|\uff1a)(\d{2})/,
+                dateStr;
 
-                if(isArray(obj) === false) {
-                    year = ((obj.match(/^..../, '')[0]) - 0);
-                    month = ((obj.match(/(?:-|\/)(.*?)(?:-|\/)/)[1]) - 1);
-                    day = ((obj.match(/(?:-|\/)(..)(\s|T|$|\u3000)/)[1]) - 0);
-
-                    if (obj.length > 10) {
-                        hour = ((obj.match(/(..)(?:\x3a|\uff1a)/)[1]) - 0); //  
-                        minute = ((obj.match(/(?:\x3a|\uff1a)(..)/)[1]) - 0);
-                    }
-                } else {
-                    year = obj[0];
-                    month = obj[1] - 1;
-                    day = obj[2];
-                    hour = obj[4];
-                    minute = obj[5];
+                if (typeof obj === 'string' && obj.length <= 10) {
+                    obj += ' 00:00';
                 }
 
-                return new Date(year, month, day, hour, minute);
+                dateStr = obj.match(reg);
+
+                return new Date(dateStr[1], dateStr[2] - 1, dateStr[3], dateStr[4], dateStr[5]);
             },
 
             checkDate: function(obj) {
@@ -56,9 +46,7 @@
             },
 
             toMpString: function(date) {
-                console.log(date);
                 var dates = this.separate(date);
-                console.log(dates);
 
                 for(var i = 1, l = dates.length; i < l; i++) {
                     dates[i] = zeroBind(dates[i]);

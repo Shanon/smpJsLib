@@ -42,7 +42,7 @@
 
     module('slash string test', {
         setup: function() {
-            this.dateStr = '2012/01/01 00:00'
+            this.dateStr = '2012/01/01 00:00';
         }
     });
 
