@@ -3,7 +3,8 @@
 *  @example $(selector).fhconvert('htof')
 *  @author murao@shanon.co.jp
 */
-(function($) {
+;(function($) {
+  'use strict';
    var name_space = 'fhconvert';
     /*
     *  @param {String} type 指定された変換方法で変換
@@ -28,11 +29,11 @@
            var $this, convertText;
            $this = $(this);
 
-           if ($this.attr('type') !== 'text') {
+           if ($this.attr('type') !== 'text' && $this[0].tagName !== 'TEXTAREA') {
                return true;
            }
 
-           convertText = FHConvert[type]($this.val(), settings);
+           convertText = window.FHConvert[type]($this.val(), settings);
            $this.val(convertText);
        });
 
