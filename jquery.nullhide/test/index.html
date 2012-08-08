@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>QUnit Test Suite</title>
+    <link rel="stylesheet" href="../qunit/qunit.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">test markup</div>
+
+    </span>
+    <table id="test_table" border="1">
+        <tr>
+            <td id="blank_test"></td>
+        </tr>
+        <tr>
+            <td id="hankaku_space_test"> </td>
+        </tr>
+        <tr>
+            <td id="zenkaku_space_test">　</td>
+        </tr>
+        <tr>
+            <td id="space_char_test">&nbsp;</td>
+        </tr>
+        <tr id="hall_nameTr">
+          <td id="image_tag_test_hide">
+            <span class="ss_hole"><span class="ss_nm">
+                <script type="text/javascript">var url = "";if (url != "") document.write('<a href="" target="_blank"></a>');else document.write("");</script>
+            </span> <br> <br> </span>  <span class="ss_hallnote"></span> 
+        </td>
+    </tr>
+        <tr id="hall_nameTr2">
+          <td id="image_tag_test_show">
+            <span class="ss_hole"><span class="ss_nm">
+                <script type="text/javascript">var url = "http://www.shanon.co.jp/corporation/summary/";if (url != "") document.write('<a href="http://www.shanon.co.jp/corporation/summary/" target="_blank">test_f_ck_holl_string</a>');else document.write("test");</script>            </span> <br> <br> </span>  <span class="ss_hallnote"></span> 
+        </td>
+    </tr>
+</table>
+
+
+    <script type="text/javascript" src="../lib/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../jquery.nullhide.js"></script>
+
+    <script src="../qunit/qunit.js"></script>
+    <script src="test.js"></script>
+</body>
+</html>

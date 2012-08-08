@@ -1,34 +1,44 @@
-(function($) {
-   var name_space = 'nullHide';
-   $.fn[name_space] = function(options) {
-       var elements = this;
-       var settings = $.extend({
-           'target_obj' : 'tr',
-           'not_obj': ''
-       }, options);
-       var trimJ = function(text) {
-           var rtrim = /^(\s|\u00A0|\u3000)+|(\s|\u00A0|\u3000)+$/g;
-           return (text || "").replace(rtrim, "");
-       };
+;(function($) {
+	'use strict';
+	$.fn.nullHide = function(options) {
+		var settings = $.extend({
+			'target_obj' : 'tr'
+		}, options),
 
-       console.log(elements);
-       elements.each(function() {
-           var $this = $(this);
-           var pureText = trimJ($this.text());
+		trimJ = function(text) {
+			var rtrim = /^(\s|\u00A0|\u3000)+|(\s|\u00A0|\u3000)+$/g;
+			return (text || "").replace(rtrim, "");
+		},
 
-           if (settings.not_obj !== '') {
-               deleteText = $this.find(settings.not_obj).text();
+        trimScrioptText = function($obj) {
+            var $script = $obj.find('script'),
+            no_script_text = $obj.text();
 
-               pureText = pureText.replace(deleteText, '');
-           }
+            if ($script.size() > 0) {
+                no_script_text = no_script_text.replace($script.text(), '');
+            }
 
-           if (pureText === "" && settings.target_obj !== 'this') {
-               $this.parents(settings.target_obj).hide();
-           } else if (pureText === "" && settings.target_obj === 'this') {
-               $this.hide();
-           }
-       });
+            return no_script_text;
+        },
 
-       return this;
-   };
-})(jQuery);
+        trim = function($obj) {
+            var trimed_text = '';
+            trimed_text = trimScrioptText($obj);
+            trimed_text = trimJ(trimed_text);
+
+            return trimed_text;
+        };
+
+		return this.each(function() {
+			var $this = $(this),
+			pureText = trim($this);
+
+            if (pureText === "" && settings.target_obj !== 'this') {
+                $this.parents(settings.target_obj).hide();
+            }
+            else if (pureText === "" && settings.target_obj === 'this') {
+                $this.hide();
+            }
+        });
+	};
+}(jQuery));
