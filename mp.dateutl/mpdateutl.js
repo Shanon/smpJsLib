@@ -79,7 +79,8 @@
                 date1 = this.checkDate(date1);
                 date2 = this.checkDate(date2);
                 return (date1.getTime() - date2.getTime()) / 86400000;
-            }
+            },
+
         };
     }());
 
