@@ -10,6 +10,10 @@
             'wrapClassName': 'input_to_text'
         }, options),
 
+        /*
+        変換したテキスト部分のスタイルを変更する必要があるときのために
+        テキスト部分をくるむ
+        */
         build$WrapObj = function(txt) {
             var $wrapObj = $('<div>');
             $wrapObj.attr('class', settings.wrapClassName);
