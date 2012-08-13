@@ -29,7 +29,7 @@
                 $checked.each(function() {
                     checked_strs.push(getNodeTextValue($(this)[0]));
                 });
-                
+
                 return checked_strs.join(checkbox_join_str);
             };
 
@@ -40,19 +40,21 @@
                 if (inputType === 'text') {
                     return $obj.val();
                 }
-                else if (inputType === 'radio') {
+
+                if (inputType === 'radio') {
                     return getRadioValue($obj);
                 }
-                else if (inputType === 'checkbox') {
+                
+                if (inputType === 'checkbox') {
                     return getCheckBoxValue($obj);
                 }
             }
-            else if (tagName === 'SELECT') {
+            
+            if (tagName === 'SELECT') {
                 return $obj.find(':selected').text();
             }
-            else {
-                return $obj.text();
-            }
+            
+            return $obj.text();
         }
 
     };
