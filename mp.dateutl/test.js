@@ -144,4 +144,15 @@
 
         strictEqual(mpdateutl.toMpString(baseDate), baseString);
     });
+
+    module('mpdateutl.isValid testing');
+    test('isValid wrong texd', function() {
+        var wrong_str = 'in valid str';
+        ok(mpdateutl.isValid(!wrong_str));
+    });
+
+    test('isValid correct texd', function() {
+        var correct_str = '2012/08/20';
+        ok(mpdateutl.isValid(correct_str));
+    });
 }());

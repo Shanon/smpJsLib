@@ -81,6 +81,13 @@
                 return (date1.getTime() - date2.getTime()) / 86400000;
             },
 
+            isValid: function(str){
+                var date = new Date(str);
+                if (Object.prototype.toString.call(date) !== "[object Date]")
+                    return false;
+                return !isNaN(date.getTime());           
+            }
+
         };
     }());
 
