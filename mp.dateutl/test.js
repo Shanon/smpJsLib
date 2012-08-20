@@ -56,6 +56,22 @@
         strictEqual(date.getMinutes(), 0);
     });
 
+    module('yy/m/d', {
+        setup: function() {
+            this.dateStr = '12/1/1 00:00';
+        }
+    });
+
+    test('date check', function() {
+        var date = mpdateutl.date(this.dateStr);
+
+        strictEqual(date.getFullYear(), 2012);
+        strictEqual(date.getMonth(), 0);
+        strictEqual(date.getDate(), 1);
+        strictEqual(date.getHours(), 0);
+        strictEqual(date.getMinutes(), 0);
+    });
+
     module('mpdateutl.add testing');
 
     test('base add test', function() {
@@ -148,7 +164,15 @@
     module('mpdateutl.isValid testing');
     test('isValid wrong texd', function() {
         var wrong_str = 'in valid str';
-        ok(mpdateutl.isValid(!wrong_str));
+        ok(!mpdateutl.isValid(wrong_str));
+    });
+    test('isValid over2days', function() {
+        var wrong_str = '2012/04/32';
+        ok(!mpdateutl.isValid(wrong_str));
+    });
+    test('isValid over1days', function() {
+        var wrong_str = '2012/04/31';
+        ok(!mpdateutl.isValid(wrong_str));
     });
 
     test('isValid correct texd', function() {

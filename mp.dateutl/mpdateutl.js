@@ -12,16 +12,18 @@
 
         return {
             date: function(obj) {
-                var reg = /^(\d{4})(?:\x2d|\u002f)(\d{2})(?:\x2d|\u002f)(\d{2})(?:\s|T|$|\u3000)(\d{2})(?:\x3a|\uff1a)(\d{2})/,
-                dateStr;
+                var reg = /^(\d{4}|\d{2})(?:\x2d|\u002f)(\d{2}|\d)(?:\x2d|\u002f)(\d{2}|\d)(?:\s|T|$|\u3000)(\d{2})(?:\x3a|\uff1a)(\d{2})/,
+                dateStr,
+                year;
 
                 if (typeof obj === 'string' && obj.length <= 10) {
                     obj += ' 00:00';
                 }
 
                 dateStr = obj.match(reg);
+                year = dateStr[1].length !== 2 ? dateStr[1] : '20' + dateStr[1];
 
-                return new Date(dateStr[1], dateStr[2] - 1, dateStr[3], dateStr[4], dateStr[5]);
+                return new Date(year, dateStr[2] - 1, dateStr[3], dateStr[4], dateStr[5]);
             },
 
             checkDate: function(obj) {
@@ -60,15 +62,15 @@
 
                 switch(format) {
                     case 'y':
-                        date.setFullYear(date.getFullYear() + num);
+                    date.setFullYear(date.getFullYear() + num);
                     break;
 
                     case 'm':
-                        date.setMonth(date.getMonth() + num);
+                    date.setMonth(date.getMonth() + num);
                     break;
 
                     case 'd':
-                        date.setDate(date.getDate() + num);
+                    date.setDate(date.getDate() + num);
                     break;
                 }
 
@@ -83,13 +85,15 @@
 
             isValid: function(str){
                 var date = new Date(str);
-                if (Object.prototype.toString.call(date) !== "[object Date]")
+                if (Object.prototype.toString.call(date) !== "[object Date]") {
                     return false;
+                }
+
                 return !isNaN(date.getTime());           
             }
 
         };
     }());
 
-    window.mpdateutl = mpdateutl;
+window.mpdateutl = mpdateutl;
 }());
