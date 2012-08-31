@@ -49,7 +49,7 @@
 
     PacsCal.fn.gcal = function() {
         return $.fullCalendar.gcalFeed(
-            "http://www.google.com/calendar/feeds/ja.japanese%23holiday@group.v.calendar.google.com/public/basic",
+            "https://www.google.com/calendar/feeds/ja.japanese%23holiday@group.v.calendar.google.com/public/basic",
             {className:'holiday'}
         );
     };
