@@ -84,16 +84,68 @@
             },
 
             isValid: function(str){
-                var date = new Date(str);
-                if (Object.prototype.toString.call(date) !== "[object Date]") {
-                    return false;
-                }
+                var date = new Date(str),
+                date_reg = /^(\d{4}|\d{2})(?:\x2d|\u002f)(\d{2}|\d)(?:\x2d|\u002f)(\d{2}|\d)/,
 
-                return !isNaN(date.getTime());           
+                valid = function() {
+                    var date_strs = str.match(date_reg),
+                    addDateStr = {};
+
+                    addDateStr.date = function() {
+                        return (date.getFullYear() - 0) + (date.getMonth() - 0) + (date.getDate() - 0);
+                    };
+
+                    addDateStr.str = function() {
+                        return (date_strs[1] - 0) + (date_strs[2] - 1) + (date_strs[3] - 0);
+                    };
+
+                    if (isNaN(date.getTime()) || !date_strs) return false;
+
+                    return addDateStr.date() === addDateStr.str();
+                };
+
+                if (Object.prototype.toString.call(date) !== "[object Date]") return false;
+
+                return valid();
             }
 
         };
     }());
-
 window.mpdateutl = mpdateutl;
+
+
+function isValidDate(date_str) {
+    var date = new Date(date_str);
+
+    if (Object.prototype.toString.call(date) !== "[object Date]") return false;
+
+    return !isNaN(date.getTime());
+}
+
+function isValidDate2(date_str) {
+    var date = new Date(date_str),
+    date_reg = /^(\d{4}|\d{2})(?:\x2d|\u002f)(\d{2}|\d)(?:\x2d|\u002f)(\d{2}|\d)/,
+
+    valid = function() {
+        var date_strs = date_str.match(date_reg),
+        addDateStr = {};
+
+        addDateStr.date = function() {
+            return (date.getFullYear() - 0) + (date.getMonth() - 0) + (date.getDate() - 0);
+        };
+
+        addDateStr.str = function() {
+            return (date_strs[1] - 0) + (date_strs[2] - 1) + (date_strs[3] - 0);
+        };
+
+        if (isNaN(date.getTime()) || !date_strs) return false;
+
+        return addDateStr.date() === addDateStr.str();
+    };
+
+    if (Object.prototype.toString.call(date) !== "[object Date]") return false;
+
+    return valid();
+}
+
 }());

@@ -170,8 +170,14 @@
         var wrong_str = '2012/04/32';
         ok(!mpdateutl.isValid(wrong_str));
     });
+
     test('isValid over1days', function() {
         var wrong_str = '2012/04/31';
+        ok(!mpdateutl.isValid(wrong_str));
+    });
+
+    test('isValid over1year', function() {
+        var wrong_str = '2012/04/366';
         ok(!mpdateutl.isValid(wrong_str));
     });
 
