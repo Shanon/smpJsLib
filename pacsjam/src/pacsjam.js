@@ -24,15 +24,30 @@
         cl(this.json);
     };
 
-    PacsJam.prototype.get = function(attribute) {
-        var attr = this.json[attribute];
+    PacsJam.prototype.get = function(attribute, type) {
+        type = type || 'Id';
+
+        var attr = this.json[attribute],
+        attr_key = attribute + type,
+
+        getListObjs = function(attrs, key) {
+            var selectedValue = [];
+
+            _.each(attrs, function(obj) {
+                console.log(key);
+                console.log(obj);
+            });
+        };
 
         if (!this.has(attribute) || attr === null) {
             return '';
         }
 
         if (!!_.isObject(attr)) {
-            return attr[attribute + 'Id'];
+            if (!!_.isArray(attr)) {
+                getListObjs(attr, attr_key);
+            }
+            return attr[attr_key];
         }
 
         return attr;
