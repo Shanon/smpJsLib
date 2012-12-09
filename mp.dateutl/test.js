@@ -188,4 +188,17 @@
         var correct_str = '2012/08/20';
         ok(mpdateutl.isValid(correct_str));
     });
+
+    module('isFuture and isPast', {
+      setup: function() {
+        this.today = new Date();
+        this.nextDay = mpdateutl.add(this.today, 1, 'm');
+      }
+    });
+    test('isFuture', function() {
+      ok(!mpdateutl.isFuture(this.today, this.nextDay));
+    });
+    test('isPast', function() {
+      ok(mpdateutl.isPast(this.today, this.nextDay));
+    });
 }());

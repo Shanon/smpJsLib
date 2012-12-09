@@ -86,6 +86,20 @@
         return date;
       },
 
+      isFuture: function(date1, date2) {
+        date1 = this.checkDate(date1);
+        date2 = this.checkDate(date2);
+
+        return date1 > date2;
+      },
+
+      isPast: function(date1, date2) {
+        date1 = this.checkDate(date1);
+        date2 = this.checkDate(date2);
+
+        return date1 < date2;
+      },
+
       diff: function(date1, date2) {
         date1 = this.checkDate(date1);
         date2 = this.checkDate(date2);
