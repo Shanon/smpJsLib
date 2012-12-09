@@ -158,7 +158,10 @@
         var baseString = '2012-06-29 16:00',
         baseDate = mpdateutl.date(baseString);
 
-        strictEqual(mpdateutl.toMpString(baseDate), baseString);
+        strictEqual(mpdateutl.toMpString(baseDate, true), baseString, 'minute flg true');
+
+        baseString = baseString.substr(0, 10);
+        strictEqual(mpdateutl.toMpString(baseDate), baseString, 'minute flg true');
     });
 
     module('mpdateutl.isValid testing');
