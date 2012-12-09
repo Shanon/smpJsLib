@@ -29,9 +29,9 @@
       datelize: function(obj) {
         if (!!obj.getMonth) {
           return new Date(obj);
-        } else {
-          return new Date(this.date(obj));
         }
+
+        return this.date(obj);
       },
 
       separate: function(date) {
@@ -131,7 +131,6 @@
 
         return valid();
       }
-
     };
   }());
   window.mpdateutl = mpdateutl;
