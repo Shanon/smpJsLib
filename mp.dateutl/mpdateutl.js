@@ -26,7 +26,7 @@
         return new Date(year, dateStr[2] - 1, dateStr[3], dateStr[4], dateStr[5]);
       },
 
-      checkDate: function(obj) {
+      datelize: function(obj) {
         if (!!obj.getMonth) {
           return new Date(obj);
         } else {
@@ -35,7 +35,7 @@
       },
 
       separate: function(date) {
-        date = this.checkDate(date);
+        date = this.datelize(date);
 
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
@@ -67,7 +67,7 @@
       },
 
       add: function(date, num, format) {
-        date = this.checkDate(date);
+        date = this.datelize(date);
 
         switch(format) {
           case 'y':
@@ -87,22 +87,22 @@
       },
 
       isFuture: function(date1, date2) {
-        date1 = this.checkDate(date1);
-        date2 = this.checkDate(date2);
+        date1 = this.datelize(date1);
+        date2 = this.datelize(date2);
 
         return date1 > date2;
       },
 
       isPast: function(date1, date2) {
-        date1 = this.checkDate(date1);
-        date2 = this.checkDate(date2);
+        date1 = this.datelize(date1);
+        date2 = this.datelize(date2);
 
         return date1 < date2;
       },
 
       diff: function(date1, date2) {
-        date1 = this.checkDate(date1);
-        date2 = this.checkDate(date2);
+        date1 = this.datelize(date1);
+        date2 = this.datelize(date2);
         return (date1.getTime() - date2.getTime()) / 86400000;
       },
 
