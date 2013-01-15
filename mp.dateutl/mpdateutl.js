@@ -28,7 +28,7 @@
 
       datelize: function(obj) {
         if (!!obj.getMonth) {
-          return new Date(obj);
+          return obj;
         }
 
         return this.date(obj);
@@ -67,7 +67,7 @@
       },
 
       add: function(date, num, format) {
-        date = this.datelize(date);
+        date = new Date(this.datelize(date));
 
         switch(format) {
           case 'y':
@@ -130,6 +130,20 @@
         if (Object.prototype.toString.call(date) !== "[object Date]") return false;
 
         return valid();
+      }
+
+      , getMonthStartDate: function(date) {
+        date = this.datelize(date);
+        date = new Date(date.getFullYear(), date.getMonth(), 1);
+
+        return date;
+      }
+
+      , getMonthEndDate: function(date) {
+        date = this.datelize(date);
+        date = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+        return date;
       }
     };
   }());
