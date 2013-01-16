@@ -24,8 +24,9 @@
         cl(this.json);
     };
 
-    PacsJam.prototype.get = function(attribute, type) {
+    PacsJam.prototype.get = function(attribute, type, separator) {
         type = type || 'Id';
+        separator = separator || ':';
 
         var attr = this.json[attribute],
         attr_key = attribute + type,
@@ -34,9 +35,10 @@
             var selectedValue = [];
 
             _.each(attrs, function(obj) {
-                console.log(key);
-                console.log(obj);
+              selectedValue.push(obj[key]);
             });
+
+            return selectedValue.join(separator);
         };
 
         if (!this.has(attribute) || attr === null) {
@@ -45,7 +47,7 @@
 
         if (!!_.isObject(attr)) {
             if (!!_.isArray(attr)) {
-                getListObjs(attr, attr_key);
+                return getListObjs(attr, attr_key);
             }
             return attr[attr_key];
         }
