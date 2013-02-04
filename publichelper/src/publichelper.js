@@ -1,17 +1,13 @@
+/***
+ * publicHelper
+ *
+ * @require mpdateutl, URI.js
+ */
 ;(function($) {
   /*global */
   'use strict';
-
-  var ClassName = function () {
-    this.initialize.apply(this, arguments);
-  };
-
-  ClassName.fn = ClassName.prototype;
-
-  ClassName.fn.initialize = function () {
-
-  };
+  var publicHelper = window.publicHelper = {};
 
 
-  window.ClassName = ClassName;
+
 }(jQuery));
