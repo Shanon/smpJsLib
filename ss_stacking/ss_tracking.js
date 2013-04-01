@@ -115,19 +115,26 @@ function _add_parameter(key, value) {
 
     if (target_url != undefined && key != undefined) {
       var aTag = document.getElementsByTagName("a");
-      re = new RegExp("^" + target_url);
-      for ( var i=0; i<aTag.length; i++ ) {
+      var anchor = '';
+      var re = new RegExp("^" + target_url);
 
-        if(aTag[i].href.match('#')) continue;
+      for ( var i=0; i<aTag.length; i++ ) {
+        anchor = '';
+
 
         if( aTag[i].href.match(re) ) {
-          debug(aTag[i].href);
-          if (aTag[i].href.match(/\?/)) {
-            aTag[i].href = aTag[i].href + '&' + key + '=' + value;
-          } else {
-            aTag[i].href = aTag[i].href + '?' + key + '=' + value;
+          console.log(aTag[i].href);
+          anchor = aTag[i].href.match(/#..*$/);
+
+          if (!!anchor) {
+            aTag[i].href = aTag[i].href.replace(/#..*$/, '');
           }
-          debug("add parameter : "+aTag[i].href);
+
+          if (aTag[i].href.match(/\?/)) {
+            aTag[i].href = aTag[i].href + '&' + key + '=' + value + anchor;
+          } else {
+            aTag[i].href = aTag[i].href + '?' + key + '=' + value + anchor;
+          }
         }
       }
       

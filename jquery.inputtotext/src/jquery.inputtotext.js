@@ -24,7 +24,7 @@
 
         return this.each(function() {
             var $this = $(this),
-            $this_val = window.smputl.getValue($this),
+            $this_val = window.smputl.getInput($this),
             $parent = $this.parents(settings.parentSelector);
 
             $parent.hide();
