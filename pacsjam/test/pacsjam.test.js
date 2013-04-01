@@ -1,5 +1,5 @@
 ;(function($) {
-  /*global test strictEqual ok PacsJam _ sampleJson*/
+  /*global test, strictEqual, ok, PacsJam, _, sampleJson*/
   'use strict';
   module('base testing', {
     setup: function() {
