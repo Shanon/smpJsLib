@@ -145,6 +145,8 @@
 
         return date;
       }
+
+      , zeroBind: zeroBind
     };
   }());
   window.mpdateutl = mpdateutl;
