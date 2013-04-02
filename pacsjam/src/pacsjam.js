@@ -1,4 +1,4 @@
-(function() {
+;(function() {
   /*global _, mpdateutl */
   'use strict';
   /*
@@ -102,6 +102,15 @@
      */
     PacsJam.prototype.has = function(attribute) {
       return _.has(this.json, attribute);
+    };
+
+
+    /**
+     *  replace new line character to br
+     *  @param {String} str A stringt that contains a new line character
+     */
+    PacsJam.prototype.replaceNewLineChar = function(str) {
+      return str.replace(/\r?\n/g, '<br />');
     };
 
     PacsJam.prototype.isCapacity = function() {
