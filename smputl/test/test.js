@@ -1,6 +1,6 @@
 (function($) {
   'use strict';
-  /*global smputl */
+  /*global smputl, test, strictEqual*/
   var $input_text = $('#input_text'),
   $select = $('#select'),
   $radio = $('#radios input'),
@@ -11,7 +11,8 @@
   radio_value = 'radio one',
   check_value = 'check one',
   select_value = 'select2',
-  hidden_value = 'hidden';
+  hidden_value = 'hidden',
+  hidden_text = 'hiddenText';
 
   module('setValue testing');
   test('input testing', function() {
@@ -71,7 +72,7 @@
     strictEqual(it_value, text_value, 'input text get');
     strictEqual(ir_value, radio_value, 'input radio get');
     strictEqual(ic_value, check_value, 'input checkbox get');
-    strictEqual(ih_value, hidden_value, 'input hidden get');
+    strictEqual(ih_value, hidden_text, 'input hidden get');
 
     //multi check
     smputl.setInput($checkbox, 'check two');
