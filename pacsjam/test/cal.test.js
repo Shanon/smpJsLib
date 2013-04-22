@@ -23,9 +23,8 @@
       this.pj = new PacsJam(sampleJson[0]);
       this.htmlPj = new PacsJam(sampleJson[this.htmlNum]);
 
-      var pc = new PacsCal(sampleJson, defalutOption);
-      pc.eventMake();
-      pc.render($('#calendar'));
+      var pc = new PacsCal($('#calendar'), sampleJson, defalutOption);
+      pc.make().render();
     },
 
     teardown: function() {
@@ -34,7 +33,7 @@
   });
 
   test('calendar info test', function() {
-    strictEqual($('.mpCal').size(), sampleJson.length - 1, 'event object check');
+    strictEqual($('.mpCal').length, sampleJson.length - 1, 'event object check');
     strictEqual($('.mpCal').eq(0).text(), this.pj.get('Title'), 'event text check');
     strictEqual($('.mpCal').eq(0).attr('href'), defalutOption.baseDmain + '/public/seminar/view/' + this.pj.get('Id'), 'link text check');
   });
@@ -55,11 +54,11 @@
       this.pj = new PacsJam(sampleJson[this.num]);
       var self = this;
 
-      var pc = new PacsCal(sampleJson, defalutOption);
-      pc.eventMake(function() {
+      var pc = new PacsCal($('#calendar'), sampleJson, defalutOption);
+      pc.make(function() {
         return {'title': self.pj.get('Title') + self.pj.get('SubTitle')};
-      });
-      pc.render($('#calendar'));
+      })
+      .render();
     },
 
     teardown: function() {
@@ -81,14 +80,14 @@
       this.pj = new PacsJam(sampleJson[this.num]);
       var self = this;
 
-      var pc = new PacsCal(sampleJson, defalutOption);
+      var pc = new PacsCal($('#calendar'), sampleJson, defalutOption);
 
       // not today is reject
       pc.reject(function(pj) {
         return (mpdateutl.diff(new Date(), pj.get('StartDay')) < 0);
-      });
-      pc.eventMake();
-      pc.render($('#calendar'));
+      })
+      .make()
+      .render();
     },
 
     teardown: function() {
@@ -98,5 +97,43 @@
 
   test('calendar info test', function() {
     strictEqual($('.mpCal').size(), 1, 'event object check');
+  });
+
+  module('add and remove testing', {
+    setup: function() {
+      strictEqual($('.mpCal').size(), 0, 'initilize check');
+      startDayApply();
+
+      this.htmlNum = 2;
+      this.pj = new PacsJam(sampleJson[0]);
+      this.htmlPj = new PacsJam(sampleJson[this.htmlNum]);
+
+      this.pc = new PacsCal($('#calendar'), sampleJson, defalutOption);
+      this.pc.make().render();
+    },
+
+    teardown: function() {
+      $('#calendar').empty();
+    }
+  });
+
+  test('remove', function() {
+    strictEqual(this.pc.getEvents().length, sampleJson.length - 1, 'first event object check');
+
+    this.pc.removeEventSource(this.pc.getEvents());
+    strictEqual($('.mpCal').length, 0, 'remove check');
+  });
+
+  test('add', function() {
+    strictEqual(this.pc.getEvents().length, sampleJson.length - 1, 'first event object check');
+
+    this.pc.addEventSource(this.pc.getEvents());
+    strictEqual($('.mpCal').length, (sampleJson.length - 1) * 2, 'add check');
+
+    this.pc.removeEventSource(this.pc.getEvents());
+    strictEqual($('.mpCal').length, 0, 'remove check');
+
+    this.pc.addEventSource(this.pc.getEvents());
+    strictEqual($('.mpCal').length, sampleJson.length - 1, 'remove and add check');
   });
 }(window.jQuery));

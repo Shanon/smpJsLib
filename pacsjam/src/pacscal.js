@@ -8,8 +8,9 @@
 
     PacsCal.fn = PacsCal.prototype;
 
-    PacsCal.fn.initialize = function($obj, options) {
+    PacsCal.fn.initialize = function($obj, json, options) {
       this._$obj = $obj;
+      this._jsons = json;
 
       this._events = [];
       this._eventSources = [];
@@ -53,17 +54,26 @@
       );
     };
 
-    PacsCal.fn.reject = function(json, cb) {
-      return  _.reject(json, function(n) {
+    PacsCal.fn.reject = function(cb) {
+      this._jsons = _.reject(this._jsons, function(n) {
         var pj = new PacsJam(n);
         return cb(pj);
       });
+
+      return this;
     };
 
-    PacsCal.fn.eventMake = function(json, cb) {
-      json = this._rejectCalEventDefalut(json);
+    PacsCal.fn.make = function(cb) {
+      this._rejectCalEventDefalut();
+      this._events = this.makeEventObjects(this._jsons, cb);
 
+      return this;
+    };
+
+    PacsCal.fn.makeEventObjects = function(json, cb) {
       var self = this;
+      var thisJsons = [];
+
 
       _.each(json, function(n) {
         var pj = new PacsJam(n);
@@ -82,19 +92,28 @@
           calObj = self._extendEventObj(calObj, cb(pj));
         }
 
-        self._events.push(calObj);
+        thisJsons.push(calObj);
       });
+
+      return thisJsons;
     };
 
     PacsCal.fn.getEvents = function() {
       return this._events;
     };
 
-    PacsCal.fn.render =function(sources) {
+    PacsCal.fn.render = function() {
       this._setCalOpt();
-
       this._$obj.fullCalendar(this._fullCalOpt);
+      this.addEventSource(this._events);
+    };
+
+    PacsCal.fn.addEventSource = function(sources) {
       this._$obj.fullCalendar('addEventSource', sources);
+    };
+
+    PacsCal.fn.removeEventSource = function(sources) {
+      this._$obj.fullCalendar('removeEventSource', sources);
     };
 
     PacsCal.fn.fullCalOptPush = function(obj) {
@@ -122,19 +141,15 @@
       return $.extend(master, extend);
     };
 
-    PacsCal.fn._rejectCalEventDefalut = function(json) {
-      var thisJson = json;
+    PacsCal.fn._rejectCalEventDefalut = function() {
       /*
        * status5 setting
        */
       if (!this._setting.status5) {
-      console.log(thisJson);
-        thisJson = this.reject(json, function(pj) {
+        this.reject(function(pj) {
           return (pj.get('SeminarStatus') === '5');
         });
       }
-
-      return thisJson;
     };
 
     PacsCal.fn._setCalOpt = function() {
