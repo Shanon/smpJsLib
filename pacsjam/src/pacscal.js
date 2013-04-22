@@ -14,6 +14,7 @@
       this._eventSources = [];
       this._fullCalOpt = {};
 
+
       this._setting = $.extend({
         'gcal': true,
         'html': true,
@@ -27,7 +28,6 @@
           'y': 50
         }
       }, options);
-
     };
 
     PacsCal.fn.dump = function() {
@@ -68,15 +68,16 @@
         var pj = new PacsJam(n),
         calObj = {};
 
-        calObj = self._extendEventObj({
-          'title': pj.get('Title'),
-          'start': pj.get('StartDay'),
-          'className': self._setting.className,
-          'url': pj.getSeminarPath(self._setting.baseDmain),
-          'tooltip': self._tooltipMake(pj.get('Title'), pj.get(self._setting.tooltip.attrName))
-        });
-
-        if (!!_.isFunction(cb)) {
+        if (!_.isFunction(cb)) {
+          calObj = self._extendEventObj(calObj, {
+            'title': pj.get('Title'),
+            'start': pj.get('StartDay'),
+            'className': self._setting.className,
+            'url': pj.getSeminarPath(self._setting.baseDmain),
+            'tooltip': self._tooltipMake(pj.get('Title'), pj.get(self._setting.tooltip.attrName))
+          });
+        }
+        else {
           calObj = self._extendEventObj(calObj, cb(pj));
         }
 
@@ -84,17 +85,15 @@
       });
     };
 
-    PacsCal.fn.getEventSources = function() {
-      this._setGcalEventSources();
-
-      return this._eventSources;
+    PacsCal.fn.getEvents = function() {
+      return this._events;
     };
 
     PacsCal.fn.render =function($obj, sources) {
       this._setCalOpt();
-      this.fullCalOptPush({eventSources: sources});
 
       $obj.fullCalendar(this._fullCalOpt);
+      $obj.fullCalendar('addEventSource', sources);
     };
 
     PacsCal.fn.fullCalOptPush = function(obj) {
@@ -110,13 +109,13 @@
     };
 
 
-    PacsCal.fn._setGcalEventSources = function() {
-      if (!!this._setting.gcal) {
-        this._eventSources.push(this.gcal());
-      }
+    // PacsCal.fn._setGcalEventSources = function() {
+    //   if (!!this._setting.gcal) {
+    //     this._eventSources.push(this.gcal());
+    //   }
 
-      this._eventSources.push(this._events);
-    };
+    //   this._eventSources.push(this._events);
+    // };
 
     PacsCal.fn._extendEventObj = function(master, extend) {
       return $.extend(master, extend);
