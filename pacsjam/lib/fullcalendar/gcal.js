@@ -1,12 +1,7 @@
-/*
- * FullCalendar v1.5.2 Google Calendar Plugin
- *
- * Copyright (c) 2011 Adam Shaw
- * Dual licensed under the MIT and GPL licenses, located in
- * MIT-LICENSE.txt and GPL-LICENSE.txt respectively.
- *
- * Date: Sun Aug 21 22:06:09 2011 -0700
- *
+/*!
+ * FullCalendar v1.6.0 Google Calendar Plugin
+ * Docs & License: http://arshaw.com/fullcalendar/
+ * (c) 2013 Adam Shaw
  */
  
 (function($) {
@@ -82,7 +77,7 @@ function transformOptions(sourceOptions, start, end) {
 					events.push({
 						id: entry['gCal$uid']['value'],
 						title: entry['title']['$t'],
-						//url: url,
+						url: url,
 						start: start,
 						end: end,
 						allDay: allDay,
