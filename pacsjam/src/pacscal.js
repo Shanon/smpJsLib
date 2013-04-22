@@ -8,8 +8,9 @@
 
     PacsCal.fn = PacsCal.prototype;
 
-    PacsCal.fn.initialize = function(jsons, options) {
-      this._jsons = jsons;
+    PacsCal.fn.initialize = function($obj, options) {
+      this._$obj = $obj;
+
       this._events = [];
       this._eventSources = [];
       this._fullCalOpt = {};
@@ -52,32 +53,32 @@
       );
     };
 
-    PacsCal.fn.reject = function(cb) {
-      this._jsons = _.reject(this._jsons, function(n) {
+    PacsCal.fn.reject = function(json, cb) {
+      return  _.reject(json, function(n) {
         var pj = new PacsJam(n);
         return cb(pj);
       });
     };
 
-    PacsCal.fn.eventMake = function(cb) {
+    PacsCal.fn.eventMake = function(json, cb) {
+      json = this._rejectCalEventDefalut(json);
+
       var self = this;
 
-      this._rejectCalEventDefalut();
+      _.each(json, function(n) {
+        var pj = new PacsJam(n);
 
-      _.each(this._jsons, function(n) {
-        var pj = new PacsJam(n),
-        calObj = {};
+        // default calobj option
+        var calObj = {
+          'title': pj.get('Title'),
+          'start': pj.get('StartDay'),
+          'className': self._setting.className,
+          'url': pj.getSeminarPath(self._setting.baseDmain),
+          'tooltip': self._tooltipMake(pj.get('Title'), pj.get(self._setting.tooltip.attrName))
+        };
 
-        if (!_.isFunction(cb)) {
-          calObj = self._extendEventObj(calObj, {
-            'title': pj.get('Title'),
-            'start': pj.get('StartDay'),
-            'className': self._setting.className,
-            'url': pj.getSeminarPath(self._setting.baseDmain),
-            'tooltip': self._tooltipMake(pj.get('Title'), pj.get(self._setting.tooltip.attrName))
-          });
-        }
-        else {
+        // if callback function is exsist, extend calobj
+        if (!!_.isFunction(cb)) {
           calObj = self._extendEventObj(calObj, cb(pj));
         }
 
@@ -89,11 +90,11 @@
       return this._events;
     };
 
-    PacsCal.fn.render =function($obj, sources) {
+    PacsCal.fn.render =function(sources) {
       this._setCalOpt();
 
-      $obj.fullCalendar(this._fullCalOpt);
-      $obj.fullCalendar('addEventSource', sources);
+      this._$obj.fullCalendar(this._fullCalOpt);
+      this._$obj.fullCalendar('addEventSource', sources);
     };
 
     PacsCal.fn.fullCalOptPush = function(obj) {
@@ -121,15 +122,19 @@
       return $.extend(master, extend);
     };
 
-    PacsCal.fn._rejectCalEventDefalut = function() {
+    PacsCal.fn._rejectCalEventDefalut = function(json) {
+      var thisJson = json;
       /*
        * status5 setting
        */
       if (!this._setting.status5) {
-        this.reject(function(pj) {
+      console.log(thisJson);
+        thisJson = this.reject(json, function(pj) {
           return (pj.get('SeminarStatus') === '5');
         });
       }
+
+      return thisJson;
     };
 
     PacsCal.fn._setCalOpt = function() {
