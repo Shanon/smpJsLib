@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href='../lib/fullcalendar/fullcalendar.css' rel='stylesheet' />
 <link href='../lib/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
-<link rel="stylesheet" href="../lib/bootstrap.min.css" />
+<link rel="stylesheet" href="./bootstrap.min.css" />
 <style>
 	body {
 		margin-top: 40px;
@@ -13,7 +13,7 @@
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 		}
 
-	#calendar {
+	#sample-table {
 		width: 900px;
 		margin: 0 auto;
 		}
@@ -21,12 +21,36 @@
 </style>
 </head>
 <body>
-<div id='calendar'></div>
+<div id='output'></div>
+
+<script type="text/template" id="tmpl">
+<table id="sample-table" class="table table-bordered">
+<thead>
+<th>タイトル</th>
+<th>開催日</th>
+<th>概要</th>
+</thead>
+<tbody>
+
+{{#seminars}}
+<tr>
+<td style="width:20%"><a href="{{seminarLink}}" target="_blank">{{title}}</a></td>
+<td style="width:15%">{{startDayDisplay}}</td>
+<td>{{summary}}</td>
+</tr>
+
+{{/seminars}}
+
+</tbody>
+</table>
+</script>
+
 <script src="../lib/jquery-1.9.0.min.js" type="text/javascript"></script>
 <script src="../lib/mpdateutl.js" type="text/javascript"></script>
 <script src="../lib/underscore-min.js" type="text/javascript"></script>
-
 <script src="../src/pacsjam.js" type="text/javascript"></script>
+
+<script src="./hogan-2.0.0.js" type="text/javascript"></script>
 <script src="./sample.js" type="text/javascript"></script>
 </body>
 </html>
